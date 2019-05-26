@@ -1,15 +1,14 @@
-# For running the latest ampache directly from the repository
+# For running the latest ampache directly from the repository, based on the work of PlusMinus0
 
-FROM php:apache
-
-MAINTAINER PlusMinus <piddlpiddl@gmail.com>
-
+FROM php:7.2-apache
+MAINTAINER beeksma 
 
 # Install everything
 # For installing ffmpeg, the deb-multimedia repository is used which might be considered unsafe so use with caution
-RUN echo deb http://www.deb-multimedia.org jessie main non-free >> /etc/apt/sources.list \
-                        && apt-get update && apt-get install -y --force-yes -q deb-multimedia-keyring \
-                        && apt-get update && apt-get install -y -q git ffmpeg libgd3 libpng-dev libjpeg-dev libfreetype6-dev \
+RUN echo deb http://www.deb-multimedia.org stretch main non-free >> /etc/apt/sources.list && \
+                        apt-get update && \
+			apt-get install -y -q deb-multimedia-keyring && \
+                        apt-get update && apt-get install -y -q git ffmpeg libgd3 libpng-dev libjpeg-dev libfreetype6-dev \
                         && docker-php-ext-install pdo_mysql gettext gd \
                         && a2enmod rewrite \
                         && cd /var/www   \
