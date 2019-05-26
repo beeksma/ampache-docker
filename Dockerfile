@@ -7,7 +7,7 @@ MAINTAINER beeksma
 # For installing ffmpeg, the deb-multimedia repository is used which might be considered unsafe so use with caution
 RUN echo deb http://www.deb-multimedia.org stretch main non-free >> /etc/apt/sources.list && \
                         apt-get update && \
-			apt-get install -y -q deb-multimedia-keyring && \
+			apt-get install -y -q --allow-unauthenticated deb-multimedia-keyring && \
                         apt-get update && apt-get install -y -q git ffmpeg libgd3 libpng-dev libjpeg-dev libfreetype6-dev \
                         && docker-php-ext-install pdo_mysql gettext gd \
                         && a2enmod rewrite \
